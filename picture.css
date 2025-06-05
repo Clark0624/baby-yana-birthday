@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
+    background: #fef1f7;
+    text-align: center;
+    position: relative;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 10;
+    padding-top: 5vh;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    color: #d6336c;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px #fff;
+  }
+  
+  .slideshow {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .slide.active {
+    opacity: 1;
+  }
+  
+  /* Fade-in container */
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+  }
+  
+  .fade-in:nth-child(2) {
+    animation-delay: 1s;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Canvas heart animation */
+  #heartCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  /* New bottom h2 style */
+  .bottom-text {
+    margin-top: 15px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #d6336c;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px #fff;
+    opacity: 0;
+    animation: fadeIn 4s forwards;
+    animation-delay: 2s;
+  }
+  

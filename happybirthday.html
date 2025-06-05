@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=DM+Serif+Display:ital@0;1&family=Dancing+Script:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="happybirthday.css">
+    <title>Happy Birthday Baby!</title>
+</head>
+<body>
+    <p class="instruction">Click the heart!</p>
+    <div class="container">
+        <label>
+            <div class="heart">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Love_Heart_SVG.svg">
+            </div>
+            <input id="messageState" type="checkbox" style="display:none"/>
+        </label>
+
+        <div class="message">   
+            <h1 style="font-family: Cinzel, serif; font-size: 40px; letter-spacing: 1.2px;">Happy Birthday!</h1>
+            <h2 style="font-family: Cinzel, serif; font-size: 30px; letter-spacing: 1.2px;">Hi Love,</h2>
+            <p> 
+                <span>
+                    &emsp; Today is your special day, and I want to make sure you know just how much you mean to me. You are more than just my partner — you are my best friend, my safe place, and my biggest blessing. Every day with you is a gift I will always be thankful for.
+                </span><br><br>
+                <span>
+                    &emsp; You bring so much light into my life. Your smile lifts my spirit. Your presence gives me peace. And your love fills my heart in ways I never thought possible. Even in silence, I feel your love. Even when we're apart, I carry you with me.
+                </span><br><br>
+                <span>
+                    &emsp; I know life isn’t always easy. There will be challenges, sad days, and moments of doubt. But I promise — I’ll be here. I’ll walk with you through the storms, hold your hand through the hard times, and cheer for you in every success. You’re never alone. You never will be.
+                </span><br><br>
+                <span>
+                    &emsp; My wish for you on your birthday is simple: that you feel loved deeply, protected always, and reminded every single day how special you are — not just to me, but to this world. You deserve all the joy, all the peace, and all the love life can give.
+                </span><br><br>
+                <span>
+                    &emsp; Thank you for being patient, kind, loving, and real. Thank you for being strong when I couldn’t be, and soft when I needed comfort. Thank you for choosing me, for staying, and for loving me in ways no one else ever could.
+                </span><br><br>
+                <span>
+                    &emsp; I promise to keep loving you with everything I have. I’ll be your support, your calm, your laughter, your rest, your reminder that you are always enough.
+                </span><br><br>
+                <span>
+                    &emsp; Let this year bring more beautiful memories, more love, and more dreams come true. I’m proud of you, I believe in you, and I’m so lucky to love you.
+                </span><br><br>
+                <span>
+                    &emsp; Happy Birthday, Mahal! I love you so much!!!
+                </span><br>
+                <span>
+                    &emsp; Forever yours ❤️❤️❤️
+                </span><br><br>
+            </p>
+            <br>
+            <div class="sincere">
+                <p style="font-weight: bold;"> With Love,</p>
+                <p>Clark Billedo</p>
+            </div>
+        </div>
+
+        <div class="next-container" style="display: none;">
+            <button id="nextButton">Next</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.2.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#messageState').on('change', function () {
+          if (this.checked) {
+            $('.message').fadeIn(1000);
+            $('.next-container').fadeIn(1500);
+          }
+        });
+  
+        $('#nextButton').on('click', function () {
+          window.location.href = 'pink heart.html'; // go to the second HTML file
+        });
+      });
+    </script>
+
+    <script src="jquery.js"></script>
+    <script src="jquery2.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="happybirthday.js"></script>
+</body>
+</html>

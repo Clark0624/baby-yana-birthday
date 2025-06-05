@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday Baby!</title>
+<style>
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    height: 100vh;
+  }
+  .container {
+    position: relative;
+    z-index: 10;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  /* Surprise Button Styles */
+  #surpriseBtn {
+    background: linear-gradient(45deg, #ff6a6a, #ff476a);
+    border: none;
+    border-radius: 50px;
+    padding: 20px 40px;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(255, 71, 92, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  #surpriseBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 25px rgba(255, 71, 92, 0.7);
+  }
+  #surpriseBtn:active {
+    transform: scale(0.95);
+  }
+
+  /* Video Box Styles */
+  #videoBox {
+    display: none;
+    margin-top: 30px;
+    width: 90vw;
+    max-width: 700px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    opacity: 1;
+    transition: opacity 1.5s ease;
+  }
+  #videoBox.fade-out {
+    opacity: 0;
+  }
+  #videoBox video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Floating animation container */
+  .floating-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Heart shape */
+  .heart {
+    position: absolute;
+    bottom: -40px;
+    width: 20px;
+    height: 20px;
+    background: #ff4b2b;
+    transform: rotate(-45deg);
+    animation: floatUp linear forwards;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 3px #ff416c);
+  }
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ff4b2b;
+    border-radius: 50%;
+  }
+  .heart::before { top: 0; left: 10px; }
+  .heart::after { top: -10px; left: 0; }
+
+  /* Tulip flower */
+  .flower {
+    position: absolute;
+    bottom: -50px;
+    width: 30px;
+    height: 40px;
+    animation: floatUpSlower linear forwards;
+    filter: drop-shadow(0 0 4px #ff4b6e);
+  }
+  .flower .stem {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 35px;
+    background: #228B22;
+    border-radius: 2px;
+    z-index: 1;
+  }
+  .flower .petals {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    z-index: 2;
+  }
+  .flower .petal {
+    width: 10px;
+    height: 30px;
+    background: linear-gradient(180deg, #ff6f91 0%, #ff3c68 100%);
+    border-radius: 15px 15px 5px 5px;
+    clip-path: ellipse(60% 90% at 50% 10%);
+    transform-origin: bottom center;
+  }
+  .flower .petal.left {
+    transform: rotate(-15deg);
+  }
+  .flower .petal.right {
+    transform: rotate(15deg);
+  }
+
+  /* Animations */
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(-45deg); opacity: 0.8; }
+    100% { transform: translateY(-120vh) rotate(-45deg); opacity: 0; }
+  }
+  @keyframes floatUpSlower {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+    100% { transform: translateY(-100vh) rotate(15deg); opacity: 0; }
+  }
+
+  /* Happy Birthday popup */
+  #happyMsg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: #ff6b81;
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+    padding: 40px 60px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(255, 107, 129, 0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    z-index: 20;
+    text-align: center;
+    user-select: none;
+  }
+  #happyMsg.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+</style>
+</head>
+<body>
+
+  <div class="container">
+    <button id="surpriseBtn">🎁 Open Your Surprise!</button>
+
+    <div id="videoBox">
+      <video id="surpriseVideo" controls autoplay muted>
+        <source src="surprisevideoo.mp4" type="video/mp4" />
+        Sorry, your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="floating-container" id="floatingContainer"></div>
+
+  <div id="happyMsg"> Happy Birthday My Love!!!</div>
+
+<script>
+  const surpriseBtn = document.getElementById('surpriseBtn');
+  const videoBox = document.getElementById('videoBox');
+  const video = document.getElementById('surpriseVideo');
+  const happyMsg = document.getElementById('happyMsg');
+
+  surpriseBtn.addEventListener('click', () => {
+    videoBox.style.display = 'block';
+    surpriseBtn.style.display = 'none';
+    video.play();
+  });
+
+  // When video ends
+  video.addEventListener('ended', () => {
+    // Fade out the video box
+    videoBox.classList.add('fade-out');
+
+    // After fade out duration, hide video box & show happy message
+    setTimeout(() => {
+      videoBox.style.display = 'none';
+      happyMsg.classList.add('show');
+    }, 1500);
+  });
+
+  const container = document.getElementById('floatingContainer');
+
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+    const size = 15 + Math.random() * 15;
+    heart.style.width = size + 'px';
+    heart.style.height = size + 'px';
+    heart.style.filter = `drop-shadow(0 0 3px rgba(255, 75, 43, ${0.5 + Math.random() * 0.5}))`;
+    container.appendChild(heart);
+    heart.addEventListener('animationend', () => heart.remove());
+  }
+
+  function createFlower() {
+    const flower = document.createElement('div');
+    flower.classList.add('flower');
+    flower.style.left = Math.random() * 100 + 'vw';
+    flower.style.animationDuration = (7 + Math.random() * 5) + 's';
+    const size = 25 + Math.random() * 15;
+    flower.style.width = size + 'px';
+    flower.style.height = (size * 1.4) + 'px';
+
+    const stem = document.createElement('div');
+    stem.className = 'stem';
+
+    const petals = document.createElement('div');
+    petals.className = 'petals';
+
+    const petalLeft = document.createElement('div');
+    petalLeft.className = 'petal left';
+
+    const petalCenter = document.createElement('div');
+    petalCenter.className = 'petal';
+
+    const petalRight = document.createElement('div');
+    petalRight.className = 'petal right';
+
+    petals.appendChild(petalLeft);
+    petals.appendChild(petalCenter);
+    petals.appendChild(petalRight);
+
+    flower.appendChild(stem);
+    flower.appendChild(petals);
+
+    container.appendChild(flower);
+
+    flower.addEventListener('animationend', () => flower.remove());
+  }
+
+  setInterval(createHeart, 300);
+  setInterval(createFlower, 1200);
+</script>
+
+</body>
+</html>
