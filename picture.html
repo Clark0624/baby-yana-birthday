@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Baby!</title>
+  <link rel="stylesheet" href="picture.css" />
+  <style>
+    /* Floating side message button */
+ .side-message {
+  display: inline-block;
+  background: #ff6b81;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+
+    .side-message:hover {
+      background: #ff4757;
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating "For you my love" button -->
+  <div class="side-message" onclick="navigateToLove()">💌 For you my love</div>
+
+  <div class="container">
+    <h1 class="fade-in">Happy Birthday Love!!!</h1>
+
+    <div class="slideshow fade-in">
+      <img src="Picture%201.jpg" class="slide active" alt="Us 1" />
+      <img src="Picture%202.jpg" class="slide" alt="Us 2" />
+      <img src="Picture%203.jpg" class="slide" alt="Us 3" />
+      <img src="Picture%204.jpg" class="slide" alt="Us 4" />
+      <img src="Picture%205.jpg" class="slide" alt="Us 5" />
+      <img src="Picture%206.jpg" class="slide" alt="Us 6" />
+      <img src="Picture%207.jpg" class="slide" alt="Us 7" />
+      <img src="Picture%208.jpg" class="slide" alt="Us 8" />
+      <img src="Picture%209.jpg" class="slide" alt="Us 9" />
+      <img src="Picture%2010.jpg" class="slide" alt="Us 10" />
+      <img src="Picture%2011.jpg" class="slide" alt="Us 11" />
+      <img src="Picture%2012.jpg" class="slide" alt="Us 12" />
+    </div>
+
+    <h2 class="bottom-text fade-in">I LOVE YOU!</h2>
+  </div>
+
+  <canvas id="heartCanvas"></canvas>
+  <canvas id="balloonCanvas"></canvas>
+
+  <audio id="birthdayAudio" autoplay loop>
+    <source src="happybday.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script src="picture.js"></script>
+  <script>
+    function navigateToLove() {
+      if (confirm("Do you want to see something special? 💖")) {
+        window.location.href = "video.html";
+      }
+    }
+  </script>
+</body>
+</html>
